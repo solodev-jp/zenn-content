@@ -10,7 +10,7 @@ published: true
 Github: https://github.com/solodev-jp/flask_setup_project
 ---
 
-# 📄 setup_db.py 仕様書
+# 📄 setup_db.py 仕様書。
 
 ## 概要
 - setup_project.pyの後に実行する事でflask+blueprint+DB機能を追加。
