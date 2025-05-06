@@ -153,7 +153,7 @@ if __name__ == "__main__":
 ![](https://github.com/solodev-jp/zenn-content/blob/main/images/2025050742158.png)
 
 - pycharm画面（必ずexe.pyの編集ページを表示）
-![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット%202025-05-07%204.23.33.png)
+![](https://github.com/solodev-jp/zenn-content/blob/main/images/2025050742333.png)
 
 - ChatGPTアプリ実行画面（必ずexe.pyが選択されているのを確認）
 ![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット%202025-05-07%204.24.53.png)
