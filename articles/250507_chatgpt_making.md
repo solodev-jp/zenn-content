@@ -150,22 +150,22 @@ if __name__ == "__main__":
 ```
 
 - ChatGPTアプリのpycharm操作設定画面（watcher.pyは先に起動しておく）
-![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット 2025-05-07 4.21.58.png)
+![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット%202025-05-07%204.21.58.png)
 
 - pycharm画面（必ずexe.pyの編集ページを表示）
-![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット 2025-05-07 4.23.33.png)
+![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット%202025-05-07%204.23.33.png)
 
 - ChatGPTアプリ実行画面（必ずexe.pyが選択されているのを確認）
-![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット 2025-05-07 4.24.53.png)
+![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット%202025-05-07%204.24.53.png)
 
 - ChatGPTアプリ自動実行設定画面
-![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット 2025-05-07 4.25.20.png)
+![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット%202025-05-07%204.25.20.png)
 
 - サイト自動生成後構造画面
-![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット 2025-05-07 5.14.43.png)
+![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット%202025-05-07%205.14.43.png)
 
 - サイト自動生成後のブラウザ表示画面
-![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット 2025-05-07 4.49.20.png)
+![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット%202025-05-07%204.49.20.png)
 
 
 ## ⚠️ Pycharm以外での操作
