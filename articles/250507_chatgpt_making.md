@@ -150,7 +150,7 @@ if __name__ == "__main__":
 ```
 
 - ChatGPTアプリのpycharm操作設定画面（watcher.pyは先に起動しておく）
-![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット%202025-05-07%204.21.58.png)
+![](https://github.com/solodev-jp/zenn-content/blob/main/images/2025050742158.png)
 
 - pycharm画面（必ずexe.pyの編集ページを表示）
 ![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット%202025-05-07%204.23.33.png)
