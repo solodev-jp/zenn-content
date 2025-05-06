@@ -150,24 +150,24 @@ if __name__ == "__main__":
 ```
 
 - ChatGPTアプリのpycharm操作設定画面（watcher.pyは先に起動しておく）
-![](../images/2025050742158.png)
+![](https://raw.githubusercontent.com/solodev-jp/zenn-content/main/images/2025050742158.png)
 
 - pycharm画面（必ずexe.pyの編集ページを表示）
-![](https://github.com/solodev-jp/zenn-content/blob/main/images/2025050742333.png)
+![](https://raw.githubusercontent.com/solodev-jp/zenn-content/main/images/2025050742333.png)
 
 - ChatGPTアプリ実行画面（必ずexe.pyが選択されているのを確認）
-![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット%202025-05-07%204.24.53.png)
+![](https://raw.githubusercontent.com/solodev-jp/zenn-content/main/images/2025050742453.png)
 
 - ChatGPTアプリ自動実行設定画面
-![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット%202025-05-07%204.25.20.png)
+![](https://raw.githubusercontent.com/solodev-jp/zenn-content/main/images/2025050742520.png)
 
 - サイト自動生成後構造画面
-![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット%202025-05-07%205.14.43.png)
+![](https://raw.githubusercontent.com/solodev-jp/zenn-content/main/images/2025050751443.png)
 
 - サイト自動生成後のブラウザ表示画面
-![](https://github.com/solodev-jp/zenn-content/blob/main/images/スクリーンショット%202025-05-07%204.49.20.png)
+![](https://raw.githubusercontent.com/solodev-jp/zenn-content/main/images/2025050744920.png)
 
 
 ## ⚠️ Pycharm以外での操作
 理由は分かりませんが自分の環境では、Pycharm以外（CursorやVsCode）では書き換えは可能でしたが自動保存は出来ず各アプリケーションで保存する一手間が必要でした。
-![[]](/images/スクリーンショット 2025-05-07 3.02.25.png)
+![](https://raw.githubusercontent.com/solodev-jp/zenn-content/main/images/2025050730225.png)
