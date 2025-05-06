@@ -149,6 +149,185 @@ if __name__ == "__main__":
 
 ```
 
+- 実際に出力されたexe.py
+```
+#!/usr/bin/env python3  
+import os  
+import sys  
+import subprocess  
+from pathlib import Path  
+from datetime import datetime  
+  
+# 1. フォルダ作成  
+for d in ('css', 'js', 'img', 'videos'):  
+    Path(d).mkdir(exist_ok=True, parents=True)  
+  
+# 2. ライブラリ自動インストール＆インポート  
+def try_import(name):  
+    try:  
+        return __import__(name)  
+    except ImportError:  
+        return None  
+  
+cv2 = try_import('cv2')  
+np = try_import('numpy')  
+  
+if cv2 is None or np is None:  
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'opencv-python', 'numpy'])  
+    cv2 = try_import('cv2')  
+    np = try_import('numpy')  
+  
+opencv_available = (cv2 is not None and np is not None)  
+  
+# 3. CSS生成 (css/style.css)css = """@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');  
+  
+:root {  
+  --primary: #0d6efd;  --accent:  #6610f2;  --bg:      #f8f9fa;}  
+  
+body {  
+  background: var(--bg);  font-family: 'Inter', sans-serif;  margin: 0;  padding: 0;}  
+  
+/* Hero */  
+.hero {  
+  position: relative;  height: 80vh;  background: #ccc;  display: grid;  place-items: center;  overflow: hidden;}  
+.hero video {  
+  position: absolute;  inset: 0;  width: 100%;  height: 100%;  object-fit: cover;}  
+.hero .content {  
+  position: relative;  z-index: 1;  text-align: center;  color: #fff;}  
+.hero h1 {  
+  font-size: 3rem;  white-space: nowrap;  border-right: .15em solid var(--accent);  overflow: hidden;  animation: typing 3.5s steps(30), blink .75s step-end infinite;}  
+@keyframes typing { from { width: 0 } to { width: 100% } }  
+@keyframes blink { 50% { border-color: transparent } }  
+  
+/* CTA Button */  
+.btn-accent {  
+  background: var(--accent);  color: #fff;  transition: transform .3s;}  
+.btn-accent:hover {  
+  transform: translateY(-5px);}  
+  
+/* Section Heading */  
+section h2 {  
+  border-left: 4px solid var(--primary);  padding-left: .5rem;  font-size: 2rem;  margin: 2rem 0 1rem;}  
+  
+/* Cards */  
+.cards {  
+  display: grid;  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));  gap: 1rem;}  
+.card {  
+  background: #fff;  border-radius: .5rem;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);  transform: translateY(20px);  opacity: 0;  animation: popin .5s forwards;}  
+.card:hover {  
+  transform: translateY(-5px);}  
+@keyframes popin { to { transform: translateY(0); opacity: 1; } }  
+  
+/* Fade-in */  
+.fade-in {  
+  opacity: 0;  transform: translateY(20px);  transition: all .6s ease-out;}  
+.fade-in.visible {  
+  opacity: 1;  transform: translateY(0);}  
+  
+@media (max-width:600px) {  
+  .navbar { flex-direction: column !important; }  .hero { height: 60vh; }}  
+"""  
+Path('css/style.css').write_text(css, encoding='utf-8')  
+  
+# 4. JavaScript生成 (js/app.js)js = """// Smooth scroll to HTML pages  
+document.querySelectorAll('a[href$=".html"]').forEach(a => {  
+  a.addEventListener('click', e => {    e.preventDefault();    document.querySelector(a.getAttribute('href'))      .scrollIntoView({ behavior: 'smooth' });  });});  
+  
+// IntersectionObserver for fade-in  
+const observer = new IntersectionObserver(entries => {  
+  entries.forEach(entry => {    if (entry.isIntersecting) entry.target.classList.add('visible');  });}, { threshold: 0.1 });  
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));  
+  
+// Staggered pop-in for cards  
+document.querySelectorAll('.card').forEach((card, i) => {  
+  card.style.setProperty('--i', i);  card.style.animationDelay = `${i * 0.2}s`;});  
+"""  
+Path('js/app.js').write_text(js, encoding='utf-8')  
+  
+# 5. ダミー画像生成  
+for i in range(1, 4):  
+    Path(f'img/work{i}.jpg').touch()  
+  
+# 6. 動画生成  
+video_file = Path('videos/hero.mp4')  
+if opencv_available:  
+    import cv2  
+    import numpy as np  
+    w, h, fps, duration = 640, 360, 30, 5  
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')  
+    out = cv2.VideoWriter(str(video_file), fourcc, fps, (w, h))  
+    for f in range(fps * duration):  
+        t = f / (fps * duration)  
+        grad = np.linspace(0, 1, w)  
+        frame = np.tile(grad, (h, 1))  
+        frame = np.dstack([  
+            (frame * 255 * (1 - t)).astype('uint8'),  
+            (frame * 255 * t).astype('uint8'),  
+            np.zeros_like(frame, dtype='uint8')  
+        ])  
+        out.write(frame)  
+    out.release()  
+else:  
+    video_file.touch()  
+  
+# 共通ヘッダーとフッター  
+header_html = """<header class="sticky-top bg-white shadow-sm">  
+  <nav class="navbar navbar-expand-lg navbar-light container">    <a class="navbar-brand" href="index.html">TestSite<br><small>テストサイト</small></a>  
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">      <span class="navbar-toggler-icon"></span>    </button>    <div class="collapse navbar-collapse" id="navMenu">      <ul class="navbar-nav ms-auto">        <li class="nav-item"><a class="nav-link" href="index.html">トップ</a></li>  
+        <li class="nav-item"><a class="nav-link" href="about.html">私たちについて</a></li>  
+        <li class="nav-item"><a class="nav-link" href="services.html">サービス</a></li>  
+        <li class="nav-item"><a class="nav-link" href="works.html">制作実績</a></li>  
+        <li class="nav-item"><a class="nav-link" href="contact.html">お問い合わせ</a></li>  
+      </ul>    </div>  </nav></header>"""  
+footer_html = """<footer class="bg-light text-center py-3">  
+  <small>&copy; 2025 TestSite</small></footer>"""  
+  
+# HTML生成関数  
+def make_page(filename, body_content):  
+    html = f"""<!DOCTYPE html>  
+<html lang="ja">  
+<head>  
+  <meta charset="UTF-8">  <meta name="viewport" content="width=device-width, initial-scale=1">  <title>{filename.replace('.html', '').title()}</title>  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">  <link rel="stylesheet" href="css/style.css"></head>  
+<body>  
+{header_html}  
+<main class="container my-5">  
+{body_content}  
+</main>  
+{footer_html}  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>  
+<script src="js/app.js"></script>  
+</body>  
+</html>"""  
+    Path(filename).write_text(html, encoding='utf-8')  
+  
+# 7. HTMLファイル自動生成  
+hero_section = """  
+<section class="hero fade-in">  
+  <video src="videos/hero.mp4" autoplay muted loop></video>  <div class="content">    <h1>Welcome to TestSite</h1>    <a href="contact.html" class="btn btn-accent">Get Started</a>  </div></section>  
+"""  
+sections = ['about', 'services', 'works', 'contact']  
+cards_html = '<div class="cards">' + ''.join(  
+    f'<div class="card"><img src="img/work{i}.jpg" class="img-fluid"><h3>Work {i}</h3></div>'  
+    for i in range(1, 4)  
+) + '</div>'  
+works_section = f'<section class="fade-in"><h2>制作実績</h2>{cards_html}</section>'  
+  
+body = hero_section  
+for sec in sections:  
+    if sec == 'works':  
+        body += works_section  
+    else:  
+        body += f'<section class="fade-in"><h2>{sec.title()}</h2><p>ダミーテキスト...</p></section>'  
+make_page('index.html', body)  
+  
+for sec in sections:  
+    make_page(f'{sec}.html', f'<section class="fade-in"><h2>{sec.title()}</h2><p>ダミーテキスト...</p></section>')  
+  
+# 8. 完了メッセージ  
+print(f"生成完了: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+```
+
 - ChatGPTアプリのpycharm操作設定画面（watcher.pyは先に起動しておく）
 ![](https://raw.githubusercontent.com/solodev-jp/zenn-content/main/images/2025050742158.png)
 
